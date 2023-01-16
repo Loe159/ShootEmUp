@@ -13,38 +13,41 @@ Vec2 Vec2_Set(float x, float y)
     return v;
 }
 
+Vec2 Vec2_Perp(Vec2 v)
+{
+    return Vec2_Set(v.y, -v.x);
+}
+
 Vec2 Vec2_Add(Vec2 v1, Vec2 v2)
 {
-    // TODO
-    return Vec2_Zero;
+    const Vec2 v3 = {v1.x+v2.x, v1.y+v2.y};
+    return v3;
 }
 
 Vec2 Vec2_Sub(Vec2 v1, Vec2 v2)
 {
-    // TODO
-    return Vec2_Zero;
+    const Vec2 v3 = {v1.x-v2.x, v1.y-v2.y};
+    return v3;
 }
 
 Vec2 Vec2_Scale(Vec2 v, float s)
 {
-    // TODO
-    return Vec2_Zero;
+    const Vec2 v2 = {v.x*s, v.y*s};
+    return v2;
 }
 
 float Vec2_Length(Vec2 v)
 {
-    // TODO
-    return 0.0f;
+    return sqrtf(powf(v.x, 2)+ powf(v.y, 2));
 }
 
 Vec2 Vec2_Normalize(Vec2 v)
 {
-    // TODO
-    return Vec2_Zero;
+    const Vec2 v2 = {v.x/ Vec2_Length(v), v.y/ Vec2_Length(v)};
+    return v2;
 }
 
 float Vec2_Distance(Vec2 v1, Vec2 v2)
 {
-    // TODO
-    return 0.0f;
+    return sqrtf(powf(v1.x-v2.x, 2)+ powf(v1.y-v2.y, 2));
 }
