@@ -18,6 +18,7 @@ void Input_Delete(Input *self)
 void Input_Update(Input *self)
 {
     self->quitPressed = false;
+    self->shootPressed = false;
 
     SDL_Event evt;
     while (SDL_PollEvent(&evt))
@@ -58,6 +59,10 @@ void Input_Update(Input *self)
                 self->vAxis = -1.f;
                 break;
 
+            case SDL_SCANCODE_SPACE:
+                self->shootPressed = true;
+                break;
+
             default:
                 break;
             }
@@ -91,6 +96,10 @@ void Input_Update(Input *self)
                 // Deplacement en bas
                 if (self->vAxis < 0.f)
                     self->vAxis = 0.f;
+                break;
+
+            case SDL_SCANCODE_SPACE:
+                self->shootPressed = false;
                 break;
 
             default:

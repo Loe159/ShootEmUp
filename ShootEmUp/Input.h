@@ -9,7 +9,7 @@ typedef struct Input_s
     bool quitPressed;
 
     /// @brief Booléen indiquant si la touche de tir vient d'être pressée.
-    //bool shootPressed;
+    bool shootPressed;
 
     /// @brief Nombre indiquant le déplacement horizontal du joueur.
     /// Les valeurs pour un clavier ou un joystick sont dans l'intervalle

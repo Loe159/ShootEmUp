@@ -46,10 +46,30 @@ void Bullet_Delete(Bullet *self)
 
 void Bullet_Update(Bullet *self)
 {
+    // On récupère des infos essentielles (communes à tout objet)
+    Scene *scene = self->scene;
+    Input *input = Scene_GetInput(scene);
 
+    // Mise à jour de la position
+    self->position = Vec2_Add(self->position, Vec2_Scale(self->velocity, Timer_GetDelta(g_time)));
 }
 
 void Bullet_Render(Bullet *self)
 {
+    Scene *scene = self->scene;
+    SDL_Renderer *renderer = Scene_GetRenderer(scene);
+    Assets *assets = Scene_GetAssets(scene);
+    Camera *camera = Scene_GetCamera(scene);
 
+    float scale = Camera_GetWorldToViewScale(camera);
+    SDL_FRect dst = {0};
+
+    dst.h = 5 * PIX_TO_WORLD * scale;
+    dst.w = 5 * PIX_TO_WORLD * scale;
+    Camera_WorldToView(camera, self->position, &dst.x, &dst.y);
+
+    dst.x -= 0.50f * dst.w;
+    dst.y -= 0.50f * dst.h;
+
+    SDL_RenderCopyExF(renderer, self->texture, NULL, &dst, 90.0f, NULL, 0);
 }
