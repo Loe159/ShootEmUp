@@ -9,8 +9,6 @@ Player *Player_New(Scene *scene)
 
     Assets *assets = Scene_GetAssets(scene);
 
-    self->texture = assets->player;
-
     self->scene = scene;
     self->position = Vec2_Set(1.0f, 4.5f);
     self->radius = 0.25f;
