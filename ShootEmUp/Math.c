@@ -1,4 +1,5 @@
 #include "Math.h"
+#include <math.h>
 
 const Vec2 Vec2_Up    = {  0.0f,  1.0f };
 const Vec2 Vec2_Down  = {  0.0f, -1.0f };
