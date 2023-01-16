@@ -38,6 +38,9 @@ typedef struct Enemy_s
     /// @brief Position de l'ennemi exprimée dans le référentiel monde.
     Vec2 position;
 
+    int health;
+    int lastShot;
+
     /// @brief Type de l'ennemi.
     /// Les valeurs possibles sont définies dans EnemyType.
     int type;
