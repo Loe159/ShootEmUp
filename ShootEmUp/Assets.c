@@ -6,6 +6,13 @@ typedef struct TextureSpec_s
     char *path;
 } TextureSpec;
 
+typedef struct FontSpec_s
+{
+    TTF_Font **ptr;
+    char *path;
+    int size;
+} FontSpec;
+
 Assets *Assets_New(SDL_Renderer *renderer)
 {
     Assets *self = (Assets *)calloc(1, sizeof(Assets));
@@ -38,6 +45,31 @@ Assets *Assets_New(SDL_Renderer *renderer)
             abort();
         }
     }
+
+    // -------------------------------------------------------------------------
+    // Chargement des polices
+
+    FontSpec fontSpecs[] = {
+        { &self->font, "../Assets/Fonts/exo_space.ttf", 50 }};
+    int fontSpecCount = sizeof(fontSpecs) / sizeof(FontSpec);
+
+    for (int i = 0; i < fontSpecCount; i++)
+    {
+        TTF_Font **fontPtr = fontSpecs[i].ptr;
+        char *path = fontSpecs[i].path;
+        int size = fontSpecs[i].size;
+
+        *fontPtr = TTF_OpenFont(path, size);
+        if (*fontPtr == NULL)
+        {
+            printf("ERROR - Loading font %s\n", path);
+            printf("      - %s\n", TTF_GetError());
+            assert(false);
+            abort();
+        }
+        self->font = *fontPtr;
+    }
+
 
     return self;
 }

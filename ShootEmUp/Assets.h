@@ -20,6 +20,9 @@ typedef struct Assets_s
 
     /// @brief Texture du tir d'un ennemi.
     SDL_Texture *fighterBullet;
+
+    /// @brief La police a utiliser pour les textes
+    TTF_Font *font;
 } Assets;
 
 /// @brief Cr�e la structure contenant les assets du jeu.

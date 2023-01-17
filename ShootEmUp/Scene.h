@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "Bullet.h"
+#include "Text.h"
 #include "Player.h"
 #include "Enemy.h"
 
@@ -49,6 +50,9 @@ typedef struct Scene_s
     /// @brief Indice de la vague d'ennemis courrante.
     /// Utilisé pour implémenter un niveau complet.
     int waveIdx;
+
+    ///@brief Score du joueur en fonction de divers paramètres.
+    Text* score;
 } Scene;
 
 /// @brief Crée la scène principale du jeu.
