@@ -42,13 +42,100 @@ void Scene_Delete(Scene *self)
 void Scene_UpdateLevel(Scene *self)
 {
     if (self->enemyCount > 0)
-        return;
-
-    if (self->waveIdx == 0)
     {
-        Enemy *enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
-        Scene_AppendEnemy(self, enemy);
-        self->waveIdx++;
+        return;
+    }else self->waveIdx++;
+
+    switch (self->waveIdx) {
+        case 1:
+            Enemy *enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 2:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 3:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 4:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 5:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 6:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 5.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 7:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 5.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 6.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+        case 8:
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 5.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 6.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 7.5f));
+            Scene_AppendEnemy(self, enemy);
+            break;
+
     }
 }
 
@@ -56,11 +143,11 @@ bool Scene_Update(Scene *self)
 {
     Player *player = self->player;
 
-    // Met à jour les entrées utilisateur
+    // Met ï¿½ jour les entrï¿½es utilisateur
     Input_Update(self->input);
 
     // -------------------------------------------------------------------------
-    // Met à jour les tirs
+    // Met ï¿½ jour les tirs
 
     int i = 0;
     while (i < self->bulletCount)
@@ -93,7 +180,7 @@ bool Scene_Update(Scene *self)
                 float dist = Vec2_Distance(bullet->position, enemy->position);
                 if (dist < bullet->radius + enemy->radius)
                 {
-                    // Inflige des dommages à l'ennemi
+                    // Inflige des dommages ï¿½ l'ennemi
                     Enemy_Damage(enemy, 1);
 
                     // Supprime le tir
@@ -126,7 +213,7 @@ bool Scene_Update(Scene *self)
     }
 
     // -------------------------------------------------------------------------
-    // Met à jour les ennemis
+    // Met ï¿½ jour les ennemis
 
     i = 0;
     while (i < self->enemyCount)
@@ -151,12 +238,12 @@ bool Scene_Update(Scene *self)
     }
 
     // -------------------------------------------------------------------------
-    // Met à jour le joueur
+    // Met ï¿½ jour le joueur
 
     Player_Update(self->player);
 
     // -------------------------------------------------------------------------
-    // Met à jour le niveau
+    // Met ï¿½ jour le niveau
 
     Scene_UpdateLevel(self);
 
