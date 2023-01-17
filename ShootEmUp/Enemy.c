@@ -12,8 +12,8 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
     self->type = type;
     self->state = ENEMY_FIRING;
     self->health = 3;
-    self->lastShot = 0;
-
+    self->timer = 0;
+    self->velocity = 0;
     Assets *assets = Scene_GetAssets(self->scene);
     switch (type)
     {
@@ -40,13 +40,20 @@ void Enemy_Delete(Enemy *self)
 
 void Enemy_Update(Enemy *self)
 {
-    if (self->lastShot++ > 100) {
-        self->lastShot = 0;
+    if (self->timer%100==0) {
         Vec2 velocity = Vec2_Set(-4.0f, 1.0f);
         Bullet *bullet = Bullet_New(
                 self->scene, self->position, velocity, BULLET_FIGHTER, 90.0f);
         Scene_AppendBullet(self->scene, bullet);
     }
+
+    if (self->timer%10==0){
+        self->velocity = cos(self->timer*5);
+    }
+    self->timer ++;
+    Vec2 velocity = Vec2_Set(0, self->velocity);
+    self->position = Vec2_Add(self->position, Vec2_Scale(velocity, Timer_GetDelta(g_time)*3));
+
 }
 
 void Enemy_Render(Enemy *self)
