@@ -30,6 +30,12 @@ void Player_Update(Player *self) {
     Scene *scene = self->scene;
     Input *input = Scene_GetInput(scene);
 
+    // Empêcher le joueur d'aller en dehors de la scène.
+    if (self->position.x < 0.0f+24*PIX_TO_WORLD && input->hAxis < 0.0f) input->hAxis = 0;
+    else if (self->position.x > 10.0f && input->hAxis > 0.0f) input->hAxis = 0;
+    if (self->position.y < 0.0f+24*PIX_TO_WORLD && input->vAxis < 0.0f) input->vAxis = 0;
+    else if (self->position.y > 9.0f-24*PIX_TO_WORLD && input->vAxis > 0.0f) input->vAxis = 0;
+
     // Mise à jour de la vitesse en fonction de l'état des touches
     Vec2 velocity = Vec2_Set(input->hAxis, input->vAxis);
 
