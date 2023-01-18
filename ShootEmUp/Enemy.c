@@ -74,6 +74,19 @@ void Enemy_Render(Enemy *self)
     dst.y -= 0.50f * dst.h;
 
     SDL_RenderCopyExF(renderer, self->texture, NULL, &dst, 90.0f, NULL, 0);
+
+
+    // Et on affiche sa barre de vie
+    dst.h = 7 * PIX_TO_WORLD * scale;
+    dst.w = 50 * PIX_TO_WORLD * scale;
+    dst.y -= 10 * PIX_TO_WORLD * scale;
+    dst.x -= 2 * PIX_TO_WORLD * scale;
+
+    // Mettre la vie sur 5
+    int health = (int)(self->health/3.0f*5.0f);
+
+    SDL_RenderCopyExF(
+            renderer, assets->health[health], NULL, &dst, 0.0f, NULL, 0);
 }
 
 void Enemy_Damage(Enemy *self, int damage)

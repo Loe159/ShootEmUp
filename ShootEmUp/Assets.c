@@ -24,6 +24,12 @@ Assets *Assets_New(SDL_Renderer *renderer)
     TextureSpec texSpecs[] = {
         { &self->layers[0],     "../Assets/Background/layer_01.png"   },
         { &self->layers[1],     "../Assets/Background/layer_02.png"   },
+        { &self->health[0],     "../Assets/UI/health_0.png"   },
+        { &self->health[1],     "../Assets/UI/health_1.png"   },
+        { &self->health[2],     "../Assets/UI/health_2.png"   },
+        { &self->health[3],     "../Assets/UI/health_3.png"   },
+        { &self->health[4],     "../Assets/UI/health_4.png"   },
+        { &self->health[5],     "../Assets/UI/health_5.png"   },
         { &self->player, "../Assets/Player/player.png"},
         { &self->playerBullet,  "../Assets/Player/bullet_default.png" },
         { &self->fighter,       "../Assets/Enemy/fighter.png"         },
