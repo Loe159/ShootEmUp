@@ -24,6 +24,9 @@ typedef enum EnemyType_e
 {
     /// @brief Ennemi simple.
     ENEMY_FIGHTER,
+
+    /// @brief Boss Ennemi.
+    ENEMY_BOSS,
 } EnemyType;
 
 /// @brief Structure repr�sentant un ennemi.
@@ -43,6 +46,10 @@ typedef struct Enemy_s
     /// @brief Type de l'ennemi.
     /// Les valeurs possibles sont d�finies dans EnemyType.
     int type;
+
+    /// @brief Type de projectile de l'ennemi.
+    /// Les valeurs possibles sont d�finies dans BulletType.
+    int bulletType;
 
     /// @brief Etat de l'ennemi.
     /// Les valeurs possibles sont d�finies dans EnemyState.
@@ -67,11 +74,14 @@ typedef struct Enemy_s
     /// @brief Vitesse de l'ennemi.
     /// Permet de régler la vitesse de l'ennemi.
     float velocity;
+
+
 } Enemy;
 
 /// @brief Cr�e un nouvel ennemi.
 /// @param scene la sc�ne.
 /// @param type le type de l'ennemi.
+/// @param bulletType
 /// @param position la position de d�part de l'ennemi exprim�e dans le r�f�rentiel monde.
 /// @return L'ennemi cr��.
 Enemy *Enemy_New(Scene *scene, int type, Vec2 position);

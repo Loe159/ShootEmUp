@@ -11,19 +11,27 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
     self->position = position;
     self->type = type;
     self->state = ENEMY_FIRING;
-    self->health = 3;
     self->timer = 0;
     self->velocity = 0;
     Assets *assets = Scene_GetAssets(self->scene);
     switch (type)
     {
     case ENEMY_FIGHTER:
+        self->health = 2;
+        self->bulletType = BULLET_FIGHTER;
         self->worldW = 64 * PIX_TO_WORLD;
         self->worldH = 64 * PIX_TO_WORLD;
         self->radius = 0.4f;
         self->texture = assets->fighter;
         break;
-
+    case ENEMY_BOSS:
+        self->health = 6;
+        self->bulletType = BULLET_BOSS;
+        self->worldW = 128 * PIX_TO_WORLD;
+        self->worldH = 128 * PIX_TO_WORLD;
+        self->radius = 0.8f;
+        self->texture = assets->boss;
+        break;
     default:
         assert(false);
         break;
@@ -43,7 +51,7 @@ void Enemy_Update(Enemy *self)
     if (self->timer%100==0) {
         Vec2 velocity = Vec2_Set(-4.0f, 1.0f);
         Bullet *bullet = Bullet_New(
-                self->scene, self->position, velocity, BULLET_FIGHTER, 90.0f);
+                self->scene, self->position, velocity, self->bulletType, 90.0f);
         Scene_AppendBullet(self->scene, bullet);
     }
 

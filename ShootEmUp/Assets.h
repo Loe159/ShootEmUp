@@ -20,6 +20,12 @@ typedef struct Assets_s
 
     /// @brief Texture du tir d'un ennemi.
     SDL_Texture *fighterBullet;
+
+    /// @brief Texture d'un boss.
+    SDL_Texture *boss;
+
+    /// @brief Texture du tir d'un boss.
+    SDL_Texture *bossBullet;
 } Assets;
 
 /// @brief Cr�e la structure contenant les assets du jeu.

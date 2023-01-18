@@ -21,6 +21,8 @@ Assets *Assets_New(SDL_Renderer *renderer)
         { &self->playerBullet,  "../Assets/Player/bullet_default.png" },
         { &self->fighter,       "../Assets/Enemy/fighter.png"         },
         { &self->fighterBullet, "../Assets/Enemy/fighter_bullet.png"  },
+        { &self->boss,       "../Assets/Enemy/boss.png"         },
+        { &self->bossBullet, "../Assets/Enemy/boss_bullet.png"  },
     };
     int texSpecCount = sizeof(texSpecs) / sizeof(TextureSpec);
 
@@ -47,7 +49,7 @@ void Assets_Delete(Assets *self)
     if (!self) return;
 
     // -------------------------------------------------------------------------
-    // Libère les textures
+    // Libï¿½re les textures
 
     SDL_Texture **texPointers[] = {
         &self->layers[0],

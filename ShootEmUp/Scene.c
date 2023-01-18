@@ -48,7 +48,7 @@ void Scene_UpdateLevel(Scene *self)
 
     switch (self->waveIdx) {
         case 1:
-            Enemy *enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            Enemy *enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 2:
