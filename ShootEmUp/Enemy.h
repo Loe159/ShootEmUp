@@ -75,6 +75,13 @@ typedef struct Enemy_s
     /// Permet de régler la vitesse de l'ennemi.
     float velocity;
 
+    /// @brief taille de l'ennemi
+    /// Permet de multiplier la taille de l'ennemi en fonction de son type.
+    float size;
+
+    /// @brief vitesse du projectile
+    /// Permet de multiplier la vitesse du projectile d'un ennemi en fonction de son type.
+    float bulletSpeed;
 
 } Enemy;
 

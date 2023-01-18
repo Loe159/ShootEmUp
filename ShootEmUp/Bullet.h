@@ -55,6 +55,9 @@ typedef struct Bullet_s
 
     /// @brief Angle de rotation du la texture pour le rendu.
     float angle;
+
+    /// @brief Multiplicateur de la taille du projectile
+    float size;
 } Bullet;
 
 /// @brief Cr�e un nouveau projectile. Ce dernier doit ensuite �tre ajout� � la
