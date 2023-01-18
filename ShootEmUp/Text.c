@@ -22,7 +22,7 @@ Text *Text_New(Scene *scene, SDL_Color color, char content[], Vec2 position, int
     Assets *assets = Scene_GetAssets(scene);
     SDL_Renderer *renderer = Scene_GetRenderer(scene);
 
-    self->surface = TTF_RenderText_Solid(assets->font, &self->content, self->color);
+    self->surface = TTF_RenderText_Solid(assets->font, self->content, self->color);
     self->texture = SDL_CreateTextureFromSurface(renderer, self->surface);
 
     // On ajuste la taille du texte en fonction de la police et du contenu
@@ -53,7 +53,7 @@ void Text_Update(Text *self)
     Assets *assets = Scene_GetAssets(scene);
     SDL_Renderer *renderer = Scene_GetRenderer(scene);
 
-    self->surface = TTF_RenderText_Solid(assets->font, &self->content, self->color);
+    self->surface = TTF_RenderText_Solid(assets->font,self->content, self->color);
 
     // On ajuste la taille du texte en fonction de la police et du contenu
     TTF_SizeText(scene->assets->font, self->content, &self->worldW, &self->worldH);
