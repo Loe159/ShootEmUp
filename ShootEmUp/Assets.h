@@ -9,6 +9,9 @@ typedef struct Assets_s
     /// @brief Tableau des diff�rents calques de fond.
     SDL_Texture *layers[2];
 
+    /// @brief Tableau des diff�rents menus.
+    SDL_Texture *menus[6];
+
     /// @brief Tableau des diff�rents calques de fond.
     SDL_Texture *health[6];
 

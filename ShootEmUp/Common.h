@@ -3,13 +3,22 @@
 #include "Settings.h"
 #include "Timer.h"
 
-/// @brief Initialise les librairies utilisées par le jeu.
+/// @brief Initialise les librairies utilisï¿½es par le jeu.
 /// @param sdlFlags les flags pour la SDL.
 /// @param imgFlags les flags pour la SDL Image.
 void Game_Init(int sdlFlags, int imgFlags);
 
-/// @brief Quitte les librairies utilisées par le jeu.
+/// @brief Quitte les librairies utilisï¿½es par le jeu.
 void Game_Quit();
 
 /// @brief Temps global du jeu.
 extern Timer *g_time;
+
+/// @brief EnumÃ©ration reprÃ©sentant les Ã©tats possibles du jeu.
+typedef enum GameState_e
+{
+    GAME_START,
+    GAME_PLAYING,
+    GAME_PAUSED,
+    GAME_OVER
+} GameState;

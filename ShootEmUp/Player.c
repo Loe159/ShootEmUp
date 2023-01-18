@@ -88,5 +88,7 @@ void Player_Render(Player *self) {
 
 void Player_Damage(Player *self, int damage)
 {
+    // Enlever de la vie au joueur et finir le jeu s'il n'a plus de vie
     if (self->health) self->health--;
+    else self->scene->state = GAME_OVER;
 }

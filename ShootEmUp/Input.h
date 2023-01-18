@@ -8,8 +8,17 @@ typedef struct Input_s
     /// @brief Booléen indiquant si le bouton "quitter" vient d'être pressé.
     bool quitPressed;
 
+    /// @brief Booléen indiquant si le bouton "echap" vient d'être pressé.
+    bool escapePressed;
+
     /// @brief Booléen indiquant si la touche de tir vient d'être pressée.
     bool shootPressed;
+
+    /// @brief indiquant l'identifiant absolu du bouton actif dans le menu (i.e. le bouton du haut = 0, bouton du bas = 1...)
+    int ui_navigation;
+
+    /// @brief Booléen indiquant si la touche "entrée" a été pressée
+    bool enterPressed;
 
     /// @brief Nombre indiquant le déplacement horizontal du joueur.
     /// Les valeurs pour un clavier ou un joystick sont dans l'intervalle
