@@ -52,10 +52,10 @@ void Scene_UpdateLevel(Scene *self)
     {
         return;
     }else self->waveIdx++;
-
+    Enemy *enemy;
     switch (self->waveIdx) {
         case 1:
-            Enemy *enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 2:
@@ -248,7 +248,7 @@ bool Scene_Update(Scene *self)
     // Actualisation du texte qui affiche le score.
     char content[16] = "Score: ";
     int enemyKilled = self->enemyKilled;
-    sprintf(content + strlen(content), "%d       ", enemyKilled); // ajout d'espace pour écraser la chaîne de caractère précédente (pas propre)
+    sprintf(content + strlen(content), "%d       ", enemyKilled); // ajout d'espace pour ï¿½craser la chaï¿½ne de caractï¿½re prï¿½cï¿½dente (pas propre)
     i = 0;
     while (content[i]){
         self->score->content[i] = content[i];
