@@ -15,6 +15,7 @@ Player *Player_New(Scene *scene)
     self->scene = scene;
     self->position = Vec2_Set(1.0f, 4.5f);
     self->radius = 0.25f;
+    self->health = 5;
 
     return self;
 }
@@ -75,9 +76,17 @@ void Player_Render(Player *self) {
     // On affiche en position dst (unités en pixels)
     SDL_RenderCopyExF(
             renderer, self->texture, NULL, &dst, 90.0f, NULL, 0);
+
+    // Et on affiche sa barre de vie
+    dst.h = 7 * PIX_TO_WORLD * scale;
+    dst.w = 50 * PIX_TO_WORLD * scale;
+    dst.y -= 10 * PIX_TO_WORLD * scale;
+    dst.x -= 2 * PIX_TO_WORLD * scale;
+    SDL_RenderCopyExF(
+            renderer, assets->health[self->health], NULL, &dst, 0.0f, NULL, 0);
 }
 
 void Player_Damage(Player *self, int damage)
 {
-    printf("Le potooship a mal\n");
+    if (self->health) self->health--;
 }
