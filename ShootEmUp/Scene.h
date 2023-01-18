@@ -8,6 +8,7 @@
 #include "Input.h"
 #include "Bullet.h"
 #include "Text.h"
+#include "Menu.h"
 #include "Player.h"
 #include "Enemy.h"
 
@@ -35,6 +36,11 @@ typedef struct Scene_s
     /// @brief Joueur principal.
     Player *player;
 
+    /// @brief Les interfaces de menus à afficher
+    Menu *startMenu;
+    Menu *pauseMenu;
+    Menu *gameOverMenu;
+
     /// @brief Tableau contenant les ennemis courrants.
     Enemy *enemies[ENEMY_CAPACITY];
 
@@ -56,6 +62,9 @@ typedef struct Scene_s
 
     ///@brief Score du joueur en fonction de divers paramètres.
     Text* score;
+
+    // @brief Etat du jeu (en pause, game over...)
+    GameState state;
 } Scene;
 
 /// @brief Crée la scène principale du jeu.

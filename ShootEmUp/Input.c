@@ -18,7 +18,9 @@ void Input_Delete(Input *self)
 void Input_Update(Input *self)
 {
     self->quitPressed = false;
+    self->escapePressed = false;
     self->shootPressed = false;
+    self->enterPressed = false;
 
     SDL_Event evt;
     while (SDL_PollEvent(&evt))
@@ -36,7 +38,7 @@ void Input_Update(Input *self)
             switch (evt.key.keysym.scancode)
             {
             case SDL_SCANCODE_ESCAPE:
-                self->quitPressed = true;
+                self->escapePressed = true;
                 break;
 
             case SDL_SCANCODE_RIGHT:
@@ -50,11 +52,17 @@ void Input_Update(Input *self)
                 break;
 
             case SDL_SCANCODE_UP:
+                // Bouton des menus en haut
+                self->ui_navigation--;
+
                 // Deplacement en haut
                 self->vAxis = 1.f;
                 break;
 
             case SDL_SCANCODE_DOWN:
+                // Bouton des menus en bas
+                self->ui_navigation++;
+
                 // Deplacement en bas
                 self->vAxis = -1.f;
                 break;
@@ -100,6 +108,10 @@ void Input_Update(Input *self)
 
             case SDL_SCANCODE_SPACE:
                 self->shootPressed = false;
+                break;
+
+            case SDL_SCANCODE_RETURN:
+                self->enterPressed = true;
                 break;
 
             default:
