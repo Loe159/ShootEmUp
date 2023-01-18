@@ -12,6 +12,7 @@ Scene *Scene_New(SDL_Renderer *renderer)
     self->input = Input_New();
     self->player = Player_New(self);
     self->waveIdx = 0;
+    self->enemyKilled = 0;
 
 
     SDL_Color white = {255, 255, 255};
@@ -147,6 +148,7 @@ bool Scene_Update(Scene *self)
             // Supprime l'ennemi
             Scene_RemoveEnemy(self, i);
             removed = true;
+            self->enemyKilled++;
         }
 
         // Passe au prochain ennemi
@@ -156,10 +158,10 @@ bool Scene_Update(Scene *self)
         }
     }
 
-    // Création d'un texte qui affiche le score.
+    // Actualisation du texte qui affiche le score.
     char content[16] = "Score: ";
-    int bulletCount = self->bulletCount;
-    sprintf(content + strlen(content), "%d       ", bulletCount); // ajout d'espace pour écraser la chaîne de caractère précédente (pas propre)
+    int enemyKilled = self->enemyKilled;
+    sprintf(content + strlen(content), "%d       ", enemyKilled); // ajout d'espace pour écraser la chaîne de caractère précédente (pas propre)
     i = 0;
     while (content[i]){
         self->score->content[i] = content[i];

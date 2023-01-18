@@ -47,6 +47,9 @@ typedef struct Scene_s
     /// @brief Nombre de projectiles courrants.
     int bulletCount;
 
+    // @brief Nombre d'ennemis tués, utile pour calculer le score.
+    int enemyKilled;
+
     /// @brief Indice de la vague d'ennemis courrante.
     /// Utilisé pour implémenter un niveau complet.
     int waveIdx;
