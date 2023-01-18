@@ -16,6 +16,7 @@ Player *Player_New(Scene *scene)
     self->position = Vec2_Set(1.0f, 4.5f);
     self->radius = 0.25f;
     self->health = 5;
+    self->speed = 3.5f;
 
     return self;
 }
@@ -41,10 +42,10 @@ void Player_Update(Player *self) {
     Vec2 velocity = Vec2_Set(input->hAxis, input->vAxis);
 
     // Mise à jour de la position
-    self->position = Vec2_Add(self->position, Vec2_Scale(velocity, Timer_GetDelta(g_time)*3));
+    self->position = Vec2_Add(self->position, Vec2_Scale(velocity, Timer_GetDelta(g_time)*(self->speed)));
 
     if (input->shootPressed){
-        Vec2 velocity = Vec2_Set(4.0f, 0.0f);
+        Vec2 velocity = Vec2_Set(10.0f, 0.0f);
         Vec2 offset = {22 * PIX_TO_WORLD, 0};
         Bullet *bullet = Bullet_New(
                 self->scene, Vec2_Add(self->position, offset), velocity, BULLET_PLAYER, 90.0f);

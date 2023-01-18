@@ -41,6 +41,9 @@ typedef struct Player_s
 
     /// @brief La vie du joueur
     int  health;
+
+    /// @brief Vitesse du joueur
+    float speed;
 } Player;
 
 /// @brief Cr�e un nouveau joueur.

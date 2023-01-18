@@ -27,6 +27,12 @@ typedef struct Assets_s
     /// @brief Texture du tir d'un ennemi.
     SDL_Texture *fighterBullet;
 
+    /// @brief Texture d'un boss.
+    SDL_Texture *boss;
+
+    /// @brief Texture du tir d'un boss.
+    SDL_Texture *bossBullet;
+
     /// @brief La police a utiliser pour les textes
     TTF_Font *font;
 } Assets;
