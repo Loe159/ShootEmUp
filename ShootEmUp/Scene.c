@@ -12,6 +12,13 @@ Scene *Scene_New(SDL_Renderer *renderer)
     self->input = Input_New();
     self->player = Player_New(self);
     self->waveIdx = 0;
+    self->enemyKilled = 0;
+
+
+    SDL_Color white = {255, 255, 255};
+    Vec2 scorePos = {10, 10};
+    char score[] = "Score 0";
+    self->score = Text_New(self, white, score, scorePos, 200, 50);
 
     return self;
 }
@@ -228,6 +235,7 @@ bool Scene_Update(Scene *self)
             // Supprime l'ennemi
             Scene_RemoveEnemy(self, i);
             removed = true;
+            self->enemyKilled++;
         }
 
         // Passe au prochain ennemi
@@ -236,6 +244,17 @@ bool Scene_Update(Scene *self)
             i++;
         }
     }
+
+    // Actualisation du texte qui affiche le score.
+    char content[16] = "Score: ";
+    int enemyKilled = self->enemyKilled;
+    sprintf(content + strlen(content), "%d       ", enemyKilled); // ajout d'espace pour écraser la chaîne de caractère précédente (pas propre)
+    i = 0;
+    while (content[i]){
+        self->score->content[i] = content[i];
+        i++;
+    }
+    Text_Update(self->score);
 
     // -------------------------------------------------------------------------
     // Met ï¿½ jour le joueur
@@ -257,6 +276,9 @@ void Scene_Render(Scene *self)
     Assets *assets = Scene_GetAssets(self);
     SDL_RenderCopy(renderer, assets->layers[0], NULL, NULL);
     SDL_RenderCopy(renderer, assets->layers[1], NULL, NULL);
+
+    // Affichage du score
+    Text_Render(self->score);
 
     // Affichage des bullets
     int bulletCount = self->bulletCount;
