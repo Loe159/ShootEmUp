@@ -41,7 +41,9 @@ typedef struct Enemy_s
     /// @brief Position de l'ennemi exprim�e dans le r�f�rentiel monde.
     Vec2 position;
 
+    // La variable de vie
     int health;
+    int maxHealth; // la vie de départ
 
     /// @brief Type de l'ennemi.
     /// Les valeurs possibles sont d�finies dans EnemyType.

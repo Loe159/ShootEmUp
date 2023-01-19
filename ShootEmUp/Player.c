@@ -17,7 +17,6 @@ Player *Player_New(Scene *scene, PlayerType type)
     self->position = Vec2_Set(1.0f, 4.5f);
     self->radius = 0.25f;
     self->health = 5;
-    self->speed = 3.5f;
 
     return self;
 }
@@ -60,6 +59,7 @@ void Player_Update(Player *self) {
         Vec2 offset = {22 * PIX_TO_WORLD, 0};
         Bullet *bullet = Bullet_New(
                 self->scene, Vec2_Add(self->position, offset), velocity, BULLET_PLAYER, 90.0f);
+        Mix_PlayChannel(1, Mix_LoadWAV("../Assets/Sound/Fx/shoot.wav"), 0);
         Scene_AppendBullet(self->scene, bullet);
     }
 }

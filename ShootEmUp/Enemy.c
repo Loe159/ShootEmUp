@@ -18,7 +18,8 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
     {
     case ENEMY_FIGHTER:
         self->size = 1;
-        self->health = 3;
+        self->maxHealth = 3;
+        self->health = self->maxHealth;
         self->bulletType = BULLET_FIGHTER;
         self->bulletSpeed = 1;
         self->worldW = 64 * PIX_TO_WORLD;
@@ -28,7 +29,8 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         break;
     case ENEMY_BOSS:
         self->size = 1.25;
-        self->health = 6;
+        self->maxHealth = 6;
+        self->health = self->maxHealth;
         self->bulletType = BULLET_BOSS;
         self->bulletSpeed = 2;
         self->worldW = 128 * PIX_TO_WORLD;
@@ -95,7 +97,8 @@ void Enemy_Render(Enemy *self)
     dst.x -= 2 * PIX_TO_WORLD * scale;
 
     // Mettre la vie sur 5
-    int health = (int)(self->health/3.0f*5.0f);
+    int health = (int)(self->health/self->maxHealth*5.0f);
+    printf("%f\n", self->health);
 
     SDL_RenderCopyExF(
             renderer, assets->health[health], NULL, &dst, 0.0f, NULL, 0);
@@ -106,5 +109,6 @@ void Enemy_Damage(Enemy *self, int damage)
     self->health = self->health - damage;
     if (self->health <= 0) {
         self->state = ENEMY_DEAD;
+        Mix_PlayChannel(2, Mix_LoadWAV("../Assets/Sound/Fx/crash.wav"), 0);
     }
 }
