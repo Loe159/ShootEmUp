@@ -19,6 +19,13 @@ typedef enum PlayerState_e
     PLAYER_DEAD,
 } PlayerState;
 
+/// @brief Enum�ration repr�sentant les �types possibles du joueur.
+typedef enum PlayerType_e
+{
+    PLAYER_MAIN,
+    PLAYER_MATE
+} PlayerType;
+
 /// @brief Structure repr�sentant le joueur.
 typedef struct Player_s
 {
@@ -41,12 +48,18 @@ typedef struct Player_s
 
     /// @brief La vie du joueur
     int  health;
+    int mateH;
+    int mateV;
+    bool mateShoot;
+
+    PlayerType type;
 } Player;
 
 /// @brief Cr�e un nouveau joueur.
 /// @param scene la sc�ne.
+/// @param type le type de joueur.
 /// @return Le joueur cr��.
-Player *Player_New(Scene *scene);
+Player *Player_New(Scene *scene, PlayerType type);
 
 /// @brief D�truit un joueur.
 /// @param self le joueur.

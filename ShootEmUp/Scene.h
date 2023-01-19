@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "Bullet.h"
+#include "Socket.h"
 #include "Text.h"
 #include "Menu.h"
 #include "Player.h"
@@ -35,6 +36,9 @@ typedef struct Scene_s
 
     /// @brief Joueur principal.
     Player *player;
+
+    /// @brief Joueur secondaire.
+    Player *mate;
 
     /// @brief Les interfaces de menus à afficher
     Menu *startMenu;
@@ -65,6 +69,13 @@ typedef struct Scene_s
 
     // @brief Etat du jeu (en pause, game over...)
     GameState state;
+
+    // @brief Mode de jeu (solo/multijoueur)
+    GameMode gameMode;
+
+    // @brief Connexion à un socket TCP pour gérer le mode multijoueur.
+    Socket *socket;
+
 } Scene;
 
 /// @brief Crée la scène principale du jeu.

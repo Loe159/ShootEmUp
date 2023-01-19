@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Common.h"
 
-Player *Player_New(Scene *scene)
+Player *Player_New(Scene *scene, PlayerType type)
 {
     Player *self = (Player *)calloc(1, sizeof(Player));
     AssertNew(self);
@@ -12,6 +12,7 @@ Player *Player_New(Scene *scene)
     self->texture = assets->player;
 
 
+    self->type = type;
     self->scene = scene;
     self->position = Vec2_Set(1.0f, 4.5f);
     self->radius = 0.25f;
@@ -31,19 +32,29 @@ void Player_Update(Player *self) {
     Scene *scene = self->scene;
     Input *input = Scene_GetInput(scene);
 
+    int playerH = input->hAxis;
+    int playerV = input->vAxis;
+    bool playerShoot = input->shootPressed;
+    // Met à jour les action du joueur secondaire
+    if (self->type == PLAYER_MATE){
+        playerH = self->mateH;
+        playerV = self->mateV;
+        playerShoot = self->mateShoot;
+    }
+
     // Empêcher le joueur d'aller en dehors de la scène.
-    if (self->position.x < 0.0f+24*PIX_TO_WORLD && input->hAxis < 0.0f) input->hAxis = 0;
-    else if (self->position.x > 10.0f && input->hAxis > 0.0f) input->hAxis = 0;
-    if (self->position.y < 0.0f+24*PIX_TO_WORLD && input->vAxis < 0.0f) input->vAxis = 0;
-    else if (self->position.y > 9.0f-24*PIX_TO_WORLD && input->vAxis > 0.0f) input->vAxis = 0;
+    if (self->position.x < 0.0f+24*PIX_TO_WORLD && input->hAxis < 0.0f) playerH = 0;
+    else if (self->position.x > 10.0f && playerH > 0.0f) playerH = 0;
+    if (self->position.y < 0.0f+24*PIX_TO_WORLD && playerV < 0.0f) playerV = 0;
+    else if (self->position.y > 9.0f-24*PIX_TO_WORLD && playerV > 0.0f) playerV = 0;
 
     // Mise à jour de la vitesse en fonction de l'état des touches
-    Vec2 velocity = Vec2_Set(input->hAxis, input->vAxis);
+    Vec2 velocity = Vec2_Set(playerH, playerV);
 
     // Mise à jour de la position
     self->position = Vec2_Add(self->position, Vec2_Scale(velocity, Timer_GetDelta(g_time)*3));
 
-    if (input->shootPressed){
+    if (playerShoot){
         Vec2 velocity = Vec2_Set(4.0f, 0.0f);
         Vec2 offset = {22 * PIX_TO_WORLD, 0};
         Bullet *bullet = Bullet_New(

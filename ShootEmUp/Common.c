@@ -27,6 +27,13 @@ void Game_Init(int sdlFlags, int imgFlags)
          assert(false); abort();
      }
 
+     // Initialise la SDL2 net
+     if (SDLNet_Init() == -1)
+     {
+         printf("ERROR - NET_Init %s\n", TTF_GetError());
+         assert(false); abort();
+     }
+
     // // Initialise la SDL2 Mixer
     // if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) < 0)
     // {
@@ -41,5 +48,6 @@ void Game_Quit()
     // Mix_Quit();
     TTF_Quit();
     IMG_Quit();
+    SDLNet_Quit();
     SDL_Quit();
 }
