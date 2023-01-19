@@ -77,7 +77,11 @@ void Scene_UpdateLevel(Scene *self)
             Scene_AppendEnemy(self, enemy);
             break;
         case 3:
-            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 4.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 4.0f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(14.0f, 3.5f));
+            Scene_AppendEnemy(self, enemy);
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 3.0f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 4:
@@ -101,11 +105,11 @@ void Scene_UpdateLevel(Scene *self)
         case 6:
             enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(14.0f, 3.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(14.0f, 3.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(13.0f, 2.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(14.0f, 1.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(14.0f, 1.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
             Scene_AppendEnemy(self, enemy);
@@ -115,29 +119,29 @@ void Scene_UpdateLevel(Scene *self)
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(14.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 5.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 5.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 5.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 3.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 3.5f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 8:
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 3.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 2.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 1.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 0.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 0.5f));
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 5.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 6.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 6.5f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 9:
@@ -149,13 +153,13 @@ void Scene_UpdateLevel(Scene *self)
             Scene_AppendEnemy(self, enemy);
             enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(14.0f, 1.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 4.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 3.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 3.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 2.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 2.5f));
             Scene_AppendEnemy(self, enemy);
-            enemy = Enemy_New(self, ENEMY_FIGHTER, Vec2_Set(15.0f, 1.5f));
+            enemy = Enemy_New(self, ENEMY_SENDER, Vec2_Set(15.0f, 1.5f));
             Scene_AppendEnemy(self, enemy);
             break;
 
@@ -280,10 +284,16 @@ bool Scene_Update(Scene *self)
                             // Inflige des dommages � l'ennemi
                             Enemy_Damage(enemy, 1);
 
-                            // Supprime le tir
-                            Scene_RemoveBullet(self, i);
-                            removed = true;
-                            break;
+                            if (enemy->type == ENEMY_SENDER){
+                                bullet->velocity.x *= -1;
+                                bullet->fromPlayer = false;
+                            }
+                            else {
+                                // Supprime le tir
+                                Scene_RemoveBullet(self, i);
+                                removed = true;
+                                break;
+                            }
                         }
                     }
                 }

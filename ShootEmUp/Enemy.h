@@ -30,6 +30,9 @@ typedef enum EnemyType_e
 
     /// @brief Ennemi qui vise le joueur.
     ENEMY_TRACKER,
+
+    /// @brief Ennemi qui renvoit les balles du joueur.
+    ENEMY_SENDER,
 } EnemyType;
 
 /// @brief Structure repr�sentant un ennemi.

@@ -18,7 +18,7 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
     {
     case ENEMY_FIGHTER:
         self->size = 1;
-        self->maxHealth = 3;
+        self->maxHealth = 2;
         self->health = self->maxHealth;
         self->bulletType = BULLET_FIGHTER;
         self->bulletSpeed = 3;
@@ -43,8 +43,19 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         self->maxHealth = 6;
         self->health = self->maxHealth;
         self->bulletType = BULLET_BOSS;
-        self->bulletSpeed = 2;
+        self->bulletSpeed = 1;
         self->worldW = 128 * PIX_TO_WORLD;
+        self->worldH = 128 * PIX_TO_WORLD;
+        self->radius = 0.8f;
+        self->texture = assets->boss;
+        break;
+    case ENEMY_SENDER:
+        self->size = 1.25;
+        self->maxHealth = 6;
+        self->health = self->maxHealth;
+        self->bulletType = BULLET_BOSS;
+        self->bulletSpeed = 1;
+        self->worldW = 20 * PIX_TO_WORLD;
         self->worldH = 128 * PIX_TO_WORLD;
         self->radius = 0.8f;
         self->texture = assets->boss;
@@ -65,11 +76,50 @@ void Enemy_Delete(Enemy *self)
 
 void Enemy_Update(Enemy *self)
 {
-    if (self->timer%50==0) {
-        Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
-        Bullet *bullet = Bullet_New(
-                self->scene, self->position, velocity, self->bulletType, 90.0f);
-        Scene_AppendBullet(self->scene, bullet);
+    switch (self->type) {
+        case ENEMY_FIGHTER:
+            if (self->timer%30==0) {
+                Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
+                Bullet *bullet = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet);
+            }
+            break;
+        case ENEMY_BOSS:
+            if (self->timer%50==0) {
+                Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
+                Bullet *bullet1 = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet1);
+                velocity.y = 1;
+                Bullet *bullet2 = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet2);
+                velocity.y = -1;
+                Bullet *bullet3 = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet3);
+            }
+            break;
+        case ENEMY_TRACKER:
+            if (self->timer%200==0) {
+                Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
+                Bullet *bullet = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet);
+            }
+            break;
+        case ENEMY_SENDER:
+            break;
+        default:
+            if (self->timer%30==0) {
+                Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
+                Bullet *bullet = Bullet_New(
+                        self->scene, self->position, velocity, self->bulletType, 90.0f);
+                Scene_AppendBullet(self->scene, bullet);
+            }
+        break;
+
     }
 
     if (self->timer%10==0){
