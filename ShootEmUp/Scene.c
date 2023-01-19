@@ -12,6 +12,9 @@ Scene *Scene_New(SDL_Renderer *renderer)
     self->input = Input_New();
     self->player = Player_New(self);
     self->waveIdx = 0;
+    Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/scene_music.mp3"), -1); //Jouer infiniment la musique
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 3); // Réduit le volume de la musique
+    Mix_AllocateChannels(32); //Allouer 32 canaux
 
     return self;
 }
@@ -312,7 +315,7 @@ void Scene_AppendBullet(Scene *self, Bullet *bullet)
 {
     Scene_AppendObject(
         bullet,
-        (void **)(self->bullets),
+        (void**)(self->bullets),
         &(self->bulletCount),
         BULLET_CAPACITY
     );

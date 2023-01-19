@@ -93,5 +93,6 @@ void Enemy_Damage(Enemy *self, int damage)
     self->health = self->health - damage;
     if (self->health <= 0) {
         self->state = ENEMY_DEAD;
+        Mix_PlayChannel(2, Mix_LoadWAV("../Assets/Sound/Fx/crash.wav"), 0);
     }
 }
