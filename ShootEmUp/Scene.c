@@ -15,6 +15,7 @@ Scene *Scene_New(SDL_Renderer *renderer)
     self->enemyKilled = 0;
     self->state = GAME_START;
     self->gameMode = MODE_SOLO;
+    self->restart = false;
 
 
     // Création des menus

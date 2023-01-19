@@ -76,6 +76,9 @@ typedef struct Scene_s
     // @brief Connexion à un socket TCP pour gérer le mode multijoueur.
     Socket *socket;
 
+    // @Redémarrage du jeu
+    bool restart
+
 } Scene;
 
 /// @brief Crï¿½e la scï¿½ne principale du jeu.

@@ -70,6 +70,11 @@ int main(int argc, char *argv[])
         // Dessine la scène
         Scene_Render(scene);
 
+        // Réinitialiser la scene
+        if (scene->restart) {
+            scene = Scene_New(renderer);
+        }
+
         // Affiche le nouveau rendu
         SDL_RenderPresent(renderer);
     }
