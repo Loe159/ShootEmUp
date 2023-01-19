@@ -14,8 +14,11 @@ typedef enum BulletType_e
     /// @brief Projectile normal provenant d'un ennemi.
     BULLET_FIGHTER,
 
-    /// @brief Projectile normal provenant d'un ennemi.
+    /// @brief Projectile normal provenant d'un boss.
     BULLET_BOSS,
+
+    /// @brief Projectile qui suit le joueur.
+    BULLET_TRACKER,
 } BulletType;
 
 /// @brief Structure repr�sentant un projectile.

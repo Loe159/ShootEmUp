@@ -27,6 +27,17 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         self->radius = 0.4f;
         self->texture = assets->fighter;
         break;
+    case ENEMY_TRACKER:
+        self->size = 1;
+        self->maxHealth = 3;
+        self->health = self->maxHealth;
+        self->bulletType = BULLET_TRACKER;
+        self->bulletSpeed = 1;
+        self->worldW = 64 * PIX_TO_WORLD;
+        self->worldH = 64 * PIX_TO_WORLD;
+        self->radius = 0.4f;
+        self->texture = assets->fighter;
+        break;
     case ENEMY_BOSS:
         self->size = 1.25;
         self->maxHealth = 6;

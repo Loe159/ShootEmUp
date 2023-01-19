@@ -77,7 +77,7 @@ void Scene_UpdateLevel(Scene *self)
             Scene_AppendEnemy(self, enemy);
             break;
         case 3:
-            enemy = Enemy_New(self, ENEMY_BOSS, Vec2_Set(15.0f, 4.5f));
+            enemy = Enemy_New(self, ENEMY_TRACKER, Vec2_Set(15.0f, 4.5f));
             Scene_AppendEnemy(self, enemy);
             break;
         case 4:

@@ -35,6 +35,15 @@ Bullet *Bullet_New(Scene *scene, Vec2 position, Vec2 velocity, int type, float a
         self->fromPlayer = false;
         break;
 
+    case BULLET_TRACKER:
+        self->size = 2;
+        self->texture = assets->bossBullet;
+        self->worldW = 16 * PIX_TO_WORLD;
+        self->worldH = 32 * PIX_TO_WORLD;
+        self->radius = 0.15f;
+        self->fromPlayer = false;
+        break;
+
     default:
     case BULLET_PLAYER:
         self->size = 1;
@@ -60,6 +69,13 @@ void Bullet_Update(Bullet *self)
     // On récupère des infos essentielles (communes à tout objet)
     Scene *scene = self->scene;
     Input *input = Scene_GetInput(scene);
+
+    switch (self->type) {
+        case BULLET_TRACKER:
+        // La vitesse verticale dépend de la position du joueur
+            self->velocity.y = scene->player->position.y-9/2;
+            break;
+    }
 
     // Mise à jour de la position
     self->position = Vec2_Add(self->position, Vec2_Scale(self->velocity, Timer_GetDelta(g_time)));

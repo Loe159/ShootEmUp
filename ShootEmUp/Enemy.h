@@ -27,6 +27,9 @@ typedef enum EnemyType_e
 
     /// @brief Boss Ennemi.
     ENEMY_BOSS,
+
+    /// @brief Ennemi qui vise le joueur.
+    ENEMY_TRACKER,
 } EnemyType;
 
 /// @brief Structure repr�sentant un ennemi.
