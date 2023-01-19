@@ -21,7 +21,7 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         self->maxHealth = 3;
         self->health = self->maxHealth;
         self->bulletType = BULLET_FIGHTER;
-        self->bulletSpeed = 1;
+        self->bulletSpeed = 3;
         self->worldW = 64 * PIX_TO_WORLD;
         self->worldH = 64 * PIX_TO_WORLD;
         self->radius = 0.4f;
@@ -55,7 +55,7 @@ void Enemy_Delete(Enemy *self)
 void Enemy_Update(Enemy *self)
 {
     if (self->timer%50==0) {
-        Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 1.0f);
+        Vec2 velocity = Vec2_Set(-4.0f*(self->bulletSpeed), 0.0f);
         Bullet *bullet = Bullet_New(
                 self->scene, self->position, velocity, self->bulletType, 90.0f);
         Scene_AppendBullet(self->scene, bullet);

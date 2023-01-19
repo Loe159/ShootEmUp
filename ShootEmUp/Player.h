@@ -48,6 +48,11 @@ typedef struct Player_s
 
     /// @brief La vie du joueur
     int  health;
+
+    /// @brief La vitesse du joueur
+    int speed;
+
+    // @brief les actions du joueur secondaire
     int mateH;
     int mateV;
     bool mateShoot;
