@@ -27,7 +27,7 @@ Scene *Scene_New(SDL_Renderer *renderer)
     Vec2 scorePos = {10, 10};
     char score[] = "Score 0";
     self->score = Text_New(self, white, score, scorePos, 200, 50);
-    Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/scene_music.mp3"), -1); //Jouer infiniment la musique
+    Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/start_music.mp3"), -1); //Jouer infiniment la musique
     Mix_VolumeMusic(MIX_MAX_VOLUME / 3); // RÃ©duit le volume de la musique
     Mix_AllocateChannels(32); //Allouer 32 canaux
 
@@ -180,10 +180,12 @@ bool Scene_Update(Scene *self)
                 if (*ui_nav == self->startMenu->firstButtonId) {
                     self->state = GAME_PLAYING; // commencer la partie en solo
                     self->gameMode = MODE_SOLO;
+                    Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/scene_music.mp3"), -1); //Jouer infiniment la musique
                 }
                 if (*ui_nav == (self->startMenu->firstButtonId+1)) {
                     self->state = GAME_PLAYING; // commencer la partie en multijoueur
                     self->gameMode = MODE_MULTI;
+                    Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/scene_music.mp3"), -1); //Jouer infiniment la musique
                     self->socket = Socket_New(self, "localhost", 12347); // connexion au socket
                     self->mate = Player_New(self, PLAYER_MATE); // création du coéquipier
                 }

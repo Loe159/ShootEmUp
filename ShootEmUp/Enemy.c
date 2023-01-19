@@ -97,8 +97,7 @@ void Enemy_Render(Enemy *self)
     dst.x -= 2 * PIX_TO_WORLD * scale;
 
     // Mettre la vie sur 5
-    int health = (int)(self->health/self->maxHealth*5.0f);
-    printf("%f\n", self->health);
+    int health = (int)((float)self->health/(float)self->maxHealth*5.0f);
 
     SDL_RenderCopyExF(
             renderer, assets->health[health], NULL, &dst, 0.0f, NULL, 0);
@@ -106,7 +105,8 @@ void Enemy_Render(Enemy *self)
 
 void Enemy_Damage(Enemy *self, int damage)
 {
-    self->health = self->health - damage;
+    self->health = self->health - 1;
+    printf("%d\n", self->health);
     if (self->health <= 0) {
         self->state = ENEMY_DEAD;
         Mix_PlayChannel(2, Mix_LoadWAV("../Assets/Sound/Fx/crash.wav"), 0);

@@ -102,5 +102,8 @@ void Player_Damage(Player *self, int damage)
 {
     // Enlever de la vie au joueur et finir le jeu s'il n'a plus de vie
     if (self->health) self->health--;
-    else self->scene->state = GAME_OVER;
+    else {
+        self->scene->state = GAME_OVER;
+        Mix_PlayMusic(Mix_LoadMUS("../Assets/Sound/Music/game_over_music.mp3"), 0); //Jouer infiniment la musique
+    }
 }
