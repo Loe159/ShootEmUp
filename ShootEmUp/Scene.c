@@ -10,10 +10,11 @@ Scene *Scene_New(SDL_Renderer *renderer)
     self->assets = Assets_New(renderer);
     self->camera = Camera_New(LOGICAL_WIDTH, LOGICAL_HEIGHT);
     self->input = Input_New();
-    self->player = Player_New(self);
+    self->player = Player_New(self, PLAYER_MAIN);
     self->waveIdx = 0;
     self->enemyKilled = 0;
     self->state = GAME_START;
+    self->gameMode = MODE_SOLO;
 
 
     // Création des menus
@@ -174,7 +175,14 @@ bool Scene_Update(Scene *self)
         switch (self->state) {
             case GAME_START:
                 if (*ui_nav == self->startMenu->firstButtonId) {
-                    self->state = GAME_PLAYING; // commencer la partie
+                    self->state = GAME_PLAYING; // commencer la partie en solo
+                    self->gameMode = MODE_SOLO;
+                }
+                if (*ui_nav == (self->startMenu->firstButtonId+1)) {
+                    self->state = GAME_PLAYING; // commencer la partie en multijoueur
+                    self->gameMode = MODE_MULTI;
+                    self->socket = Socket_New(self, "localhost", 12347); // connexion au socket
+                    self->mate = Player_New(self, PLAYER_MATE); // création du coéquipier
                 }
                 else if (*ui_nav == self->startMenu->lastButtonId) self->input->quitPressed = true; // quitter le jeu
                 break;
@@ -215,6 +223,23 @@ bool Scene_Update(Scene *self)
             Menu_Update_Active_Button(self->pauseMenu, ui_nav);
             break;
         case GAME_PLAYING:
+            if (self->gameMode == MODE_MULTI){
+                /// Obtention du "code d'actions" (i.e. chaque chiffre correspond à une action -> 101 = le joueur va à droite et tire
+                int actions = (self->input->hAxis+2)*100 + (self->input->vAxis+2)*10 + self->input->shootPressed;
+                // Vérifie si un message a été reçu par le socket
+                if (Socket_Get_Data(self->socket)){
+                    // Convertir la chaîne de caractère en int
+                    self->mate->mateH = (int)(self->socket->buf[0]-'2');
+                    self->mate->mateV = (int)(self->socket->buf[1]-'2');
+                    self->mate->mateShoot = self->socket->buf[2]-'0';
+                }
+                int i = 0;
+                // Vérifie si le "code d'action" est le même que la précédente frame, pour éviter de faire trop de requête au serveur
+                if (self->socket->messageToSend != actions){
+                    self->socket->messageToSend = actions;
+                    Socket_Send_Data(self->socket); // Envoyer l'action à l'autre joueur
+                }
+            }
             i = 0;
             while (i < self->bulletCount)
             {
@@ -319,6 +344,10 @@ bool Scene_Update(Scene *self)
             // Met ï¿½ jour le joueur
 
             Player_Update(self->player);
+            if (self->gameMode == MODE_MULTI){
+                Player_Update(self->mate);
+            }
+
 
             // -------------------------------------------------------------------------
             // Met ï¿½ jour le niveau
@@ -361,8 +390,18 @@ void Scene_Render(Scene *self)
                 Enemy_Render(self->enemies[i]);
             }
 
-            // Affichage du joueur
-            Player_Render(self->player);
+        switch (self->gameMode) {
+            case MODE_SOLO:
+                // Affichage du joueur
+                Player_Render(self->player);
+                break;
+
+            case MODE_MULTI:
+                // Affichage des deux joueurs
+                Player_Render(self->player);
+                Player_Render(self->mate);
+                break;
+        }
     }
     if (self->state == GAME_PAUSED) {
         // Affichage du menu de pause

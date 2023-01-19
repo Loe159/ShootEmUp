@@ -22,3 +22,10 @@ typedef enum GameState_e
     GAME_PAUSED,
     GAME_OVER
 } GameState;
+
+/// @brief Enumération pour savoir si le joueur joue seul ou en multijoueur.
+typedef enum GameMode_e
+{
+    MODE_SOLO,
+    MODE_MULTI
+} GameMode;
