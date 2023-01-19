@@ -106,7 +106,7 @@ void Enemy_Render(Enemy *self)
 void Enemy_Damage(Enemy *self, int damage)
 {
     self->health = self->health - 1;
-    printf("%d\n", self->health);
+    Mix_PlayChannel(3, Mix_LoadWAV("../Assets/Sound/Fx/impact.wav"), 0);
     if (self->health <= 0) {
         self->state = ENEMY_DEAD;
         Mix_PlayChannel(2, Mix_LoadWAV("../Assets/Sound/Fx/crash.wav"), 0);
