@@ -382,6 +382,7 @@ void Scene_Render(Scene *self)
     Assets *assets = Scene_GetAssets(self);
     SDL_RenderCopy(renderer, assets->layers[0], NULL, NULL);
     SDL_RenderCopy(renderer, assets->layers[1], NULL, NULL);
+    SDL_RenderCopy(renderer, assets->background, NULL, NULL);
 
 
     if (self->state == GAME_START) {

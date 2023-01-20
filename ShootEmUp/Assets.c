@@ -24,6 +24,7 @@ Assets *Assets_New(SDL_Renderer *renderer)
     TextureSpec texSpecs[] = {
         { &self->layers[0],     "../Assets/Background/layer_01.png"   },
         { &self->layers[1],     "../Assets/Background/layer_02.png"   },
+        { &self->background,     "../Assets/Background/background.png"   },
         { &self->menus[0],     "../Assets/UI/start_0.png"   },
         { &self->menus[1],     "../Assets/UI/start_1.png"   },
         { &self->menus[2],     "../Assets/UI/start_2.png"   },
