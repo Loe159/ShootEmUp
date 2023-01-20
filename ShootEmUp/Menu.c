@@ -27,6 +27,7 @@ void Menu_Update_Active_Button(Menu *self, int *ui_navigation){
     if (*ui_navigation < self->firstButtonId) *ui_navigation = self->lastButtonId; // Si c'est le dernier bouton, retourner au premier
     else if (*ui_navigation > self->lastButtonId) *ui_navigation = self->firstButtonId; // ...et si c'est le premier bouton, aller au dernier
     self->currentButtonId = *ui_navigation;
+    printf("%d\n", self->currentButtonId);
 }
 
 void Menu_Render(Menu *self)

@@ -21,8 +21,8 @@ Scene *Scene_New(SDL_Renderer *renderer)
     // Création des menus
     Vec2 position = {0, 0};
     self->startMenu = Menu_New(self, 0, 2, position, 16, 9);
-    self->pauseMenu = Menu_New(self, 3, 4, position, 16, 9);
-    self->gameOverMenu = Menu_New(self, 5, 5, position, 16, 9);
+    self->pauseMenu = Menu_New(self, 3, 5, position, 16, 9);
+    self->gameOverMenu = Menu_New(self, 6, 7, position, 16, 9);
 
     SDL_Color white = {255, 255, 255};
     Vec2 scorePos = {10, 10};
@@ -200,10 +200,16 @@ bool Scene_Update(Scene *self)
                 if (*ui_nav == self->pauseMenu->firstButtonId) {
                     self->state = GAME_PLAYING; // reprendre la partie
                 }
+                else if (*ui_nav == (self->pauseMenu->firstButtonId+1)){
+                    self->restart = true;
+                }
                 else self->input->quitPressed = true; // quitter la partie
                 break;
             case GAME_OVER:
-                self->input->quitPressed = true; // quitter la partie
+                if (*ui_nav == self->gameOverMenu->firstButtonId) {
+                    self->restart = true;
+                }
+                else self->input->quitPressed = true; // quitter la partie
         }
     }
 
@@ -231,6 +237,9 @@ bool Scene_Update(Scene *self)
             break;
         case GAME_PAUSED:
             Menu_Update_Active_Button(self->pauseMenu, ui_nav);
+            break;
+        case GAME_OVER:
+            Menu_Update_Active_Button(self->gameOverMenu, ui_nav);
             break;
         case GAME_PLAYING:
             if (self->gameMode == MODE_MULTI){
