@@ -380,8 +380,6 @@ void Scene_Render(Scene *self)
     // Affichage du fond
     SDL_Renderer *renderer = Scene_GetRenderer(self);
     Assets *assets = Scene_GetAssets(self);
-    SDL_RenderCopy(renderer, assets->layers[0], NULL, NULL);
-    SDL_RenderCopy(renderer, assets->layers[1], NULL, NULL);
     SDL_RenderCopy(renderer, assets->background, NULL, NULL);
 
 

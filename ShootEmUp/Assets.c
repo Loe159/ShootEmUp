@@ -22,8 +22,6 @@ Assets *Assets_New(SDL_Renderer *renderer)
     // Chargement des textures
 
     TextureSpec texSpecs[] = {
-        { &self->layers[0],     "../Assets/Background/layer_01.png"   },
-        { &self->layers[1],     "../Assets/Background/layer_02.png"   },
         { &self->background,     "../Assets/Background/background.png"   },
         { &self->menus[0],     "../Assets/UI/start_0.png"   },
         { &self->menus[1],     "../Assets/UI/start_1.png"   },
@@ -99,8 +97,6 @@ void Assets_Delete(Assets *self)
     // Lib�re les textures
 
     SDL_Texture **texPointers[] = {
-        &self->layers[0],
-        &self->layers[1],
         &self->player,
         &self->playerBullet,
         &self->fighter,
