@@ -30,6 +30,12 @@ typedef struct Assets_s
     /// @brief Texture d'un boss.
     SDL_Texture *boss;
 
+    // @brief Texture d'un ennemi renvoyeur.
+    SDL_Texture *sender;
+
+    // @brief Texture d'un ennemi traqueur.
+    SDL_Texture *tracker;
+
     /// @brief Texture du tir d'un boss.
     SDL_Texture *bossBullet;
 

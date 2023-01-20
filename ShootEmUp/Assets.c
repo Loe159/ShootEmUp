@@ -41,6 +41,8 @@ Assets *Assets_New(SDL_Renderer *renderer)
         { &self->fighter,       "../Assets/Enemy/fighter.png"         },
         { &self->fighterBullet, "../Assets/Enemy/fighter_bullet.png"  },
         { &self->boss,       "../Assets/Enemy/boss.png"         },
+        { &self->tracker,       "../Assets/Enemy/tracker.png"         },
+        { &self->sender,       "../Assets/Enemy/sender.png"         },
         { &self->bossBullet, "../Assets/Enemy/boss_bullet.png"  },
     };
     int texSpecCount = sizeof(texSpecs) / sizeof(TextureSpec);

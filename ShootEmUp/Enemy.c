@@ -36,7 +36,7 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         self->worldW = 64 * PIX_TO_WORLD;
         self->worldH = 64 * PIX_TO_WORLD;
         self->radius = 0.4f;
-        self->texture = assets->fighter;
+        self->texture = assets->tracker;
         break;
     case ENEMY_BOSS:
         self->size = 1.25;
@@ -51,14 +51,14 @@ Enemy *Enemy_New(Scene *scene, int type, Vec2 position)
         break;
     case ENEMY_SENDER:
         self->size = 1.25;
-        self->maxHealth = 6;
+        self->maxHealth = 10;
         self->health = self->maxHealth;
         self->bulletType = BULLET_BOSS;
         self->bulletSpeed = 1;
         self->worldW = 20 * PIX_TO_WORLD;
         self->worldH = 128 * PIX_TO_WORLD;
         self->radius = 0.8f;
-        self->texture = assets->boss;
+        self->texture = assets->sender;
         break;
     default:
         assert(false);
@@ -148,7 +148,7 @@ void Enemy_Render(Enemy *self)
     dst.x -= 0.50f * dst.w;
     dst.y -= 0.50f * dst.h;
 
-    SDL_RenderCopyExF(renderer, self->texture, NULL, &dst, 90.0f, NULL, 0);
+    SDL_RenderCopyExF(renderer, self->texture, NULL, &dst, -90.0f, NULL, 0);
 
 
     // Et on affiche sa barre de vie
